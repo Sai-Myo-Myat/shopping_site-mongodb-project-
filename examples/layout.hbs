@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{pageTitle}}</title>
+    {{#if mainCss}} 
+      <link rel="stylesheet" href="../css/main.module.css" />
+    {{/if}}
+    {{#if productPageCss}}
+      <link rel="stylesheet" href="../css/product.module.css" />
+    {{/if}}
+  </head>
+  <body>
+    <header>
+      <nav class="nav">
+        <ul class="tabs">
+          <li>
+            <a class="tab {{#if shopPageActive}}active{{/if}}" href="/">Shop</a>
+          </li>
+          <li>
+            <a class="tab {{#if productPageActive}}active{{/if}}" href="/admin/add-product">Add Product</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    {{{body}}}
+  </body>
+</html>

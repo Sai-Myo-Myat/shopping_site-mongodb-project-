@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>add product</title>
+    <link rel="stylesheet" href="../css/main.module.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="nav">
+        <ul class="tabs">
+          <li><a class="tab" href="/">Shop</a></li>
+          <li><a class="tab" href="/admin/add-product">Add Product</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <% if products.length > 0 { %>
+      <h1>Alright!</h1>
+      <% } else %>
+      <h1>No product found</h1>
+      <% } %>
+    </main>
+  </body>
+</html>

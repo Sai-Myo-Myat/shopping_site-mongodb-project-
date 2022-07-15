@@ -1,0 +1,12 @@
+extends layout/layout.pug
+
+block content           
+  main
+    if products.length > 0
+      ul
+        h1 Product Lists
+        each  product in products 
+          li #{product.title}
+    
+    else 
+      h1 No product found!!

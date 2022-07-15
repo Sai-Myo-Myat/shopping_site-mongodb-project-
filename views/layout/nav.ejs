@@ -1,0 +1,27 @@
+<header>
+  <nav class="nav">
+    <ul class="tabs">
+      <li>
+        <a class="tab <%= path==='/' ? 'active' : '' %>" href="/">Home</a>
+      </li>
+      <li>
+        <a class="tab <%= path==='/products' ? 'active' : '' %>" href="/products">Products</a>
+      </li>
+      <li>
+        <a class="tab <%= path==='/cart' ? 'active' : '' %>" href="/cart">Cart</a>
+      </li>
+      <li>
+        <a class="tab <%= path==='/orders' ? 'active' : '' %>" href="/orders">Orders</a>
+      </li>
+      <li>
+        <a class="tab <%= path==='/checkout' ? 'active' : '' %>" href="/checkout">Checkout</a>
+      </li>
+      <li>
+        <a class="tab <%= path==='/admin/add-product' ? 'active' : '' %>" href="/admin/add-product">Add Product</a>
+      </li>
+      <li>
+        <a class="tab <%= path==='/admin/products' ? 'active' : '' %>" href="/admin/products">Admin Products</a>
+      </li>
+    </ul>
+  </nav>
+</header>

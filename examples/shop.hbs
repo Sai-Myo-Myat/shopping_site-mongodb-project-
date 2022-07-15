@@ -1,0 +1,14 @@
+<main>
+  {{#if hasProduct}}
+    <ul>
+      <h1>Products lists</h1>
+      {{#each products}}
+        <li>{{this.title}}</li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <h1>welcome from shop page!!!</h1>
+
+  {{/if}}
+
+</main>
