@@ -43,8 +43,14 @@ exports.addProduct =  (req, res, next) => {
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;
   const description = req.body.description;
-  const products = new ProductModel(null,title,imageUrl,price,description);
+  const products = new ProductModel(title,imageUrl,price,description);
   products.save()
+  .then(result => {
+    console.log("product is created")
+  })
+  .catch(err => {
+    console.log(err);
+  })
   res.redirect("/");
 }
 
@@ -55,7 +61,7 @@ exports.editProduct = (req,res,next) => {
   const price = req.body.price;
   const description = req.body.description;
   const products = new ProductModel(productId,title,imageUrl,price,description) 
-  products.save();
+  products.save()
   res.redirect("/admin/products")
 }
 

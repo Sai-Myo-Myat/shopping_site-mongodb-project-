@@ -1,8 +1,12 @@
 const path  = require("path")
 const fs = require("fs");
 const CartModel = require('./cart')
-const mongo = require('../Util/database').getDb;
+
 const dir = require.main.path;
+
+//mongoDb
+const getDb = require('../Util/database').getDb;
+const mongoDb = require('mongodb')
 
 const p = path.join(dir, "data", "products.json");
 
@@ -18,8 +22,7 @@ const getProductDataFromFile = (callBackFun) => {
 } 
 
 module.exports = class ProductModel {
-  constructor(id,title,imageUrl,price,description) {
-    this.id = id;
+  constructor(title,imageUrl,price,description) {
     this.title = title;
     this.imageUrl = imageUrl
     this.price = price;
@@ -27,34 +30,42 @@ module.exports = class ProductModel {
   }
 
   save(){
-    
-    getProductDataFromFile(products => {
-      if(this.id) {
-        const exitingProductIndex = products.findIndex(product => product.id === this.id)
-        const allproducts = [...products];
-        allproducts[exitingProductIndex] = this;
-        fs.writeFile(p,JSON.stringify(allproducts),(err) => {
-          console.log(err);
-        })
-      }else {
-        this.id = Math.random().toString();
-        products.push(this)
-        fs.writeFile(p,JSON.stringify(products), err => {
-          console.log("error from writing ",p, "file's content -", err)
-        })
-      }
-     
+    const db = getDb();
+    return db.collection('porducts')
+    .insertOne(this)
+    .then(result => {
+      console.log("this is result",result);
+    })
+    .catch(err => {
+      console.log(err)
     })
   }
 
   static fetchProducts(callBackFun){
-    getProductDataFromFile(callBackFun);
+    const db = getDb();
+    return db.collection("porducts")
+    .find() //cursor
+    .toArray()
+    .then(products=> {
+      console.log("products", products)
+      return products;
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
 
-  static fetchOneProduct(id,callBackFun) {
-    getProductDataFromFile(products => {
-      const product = products.find(product => product.id === id);
-      callBackFun(product);
+  static fetchOneProduct(id) {
+    const db = getDb();
+    return db.collection("products")
+    .find({_id: new mongoDb.ObjectId(id)})
+    .next()
+    .then(product => {
+      console.log("this is product", product)
+      return product;
+    })
+    .catch(err => {
+      console.log(err)
     })
   }
 
